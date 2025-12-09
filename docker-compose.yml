@@ -1,0 +1,29 @@
+# ============================================
+# DOCKER COMPOSE - Orquestra os containers
+# ============================================
+# Este arquivo define como os containers vão rodar juntos
+
+version: '3.8'
+
+services:
+  # Container do Backend (API Node.js)
+  backend:
+    build: ./backend
+    ports:
+      - "3000:3000"    # Porta externa:interna
+    volumes:
+      - ./backend:/app           # Sincroniza código
+      - /app/node_modules        # Protege node_modules do container
+    environment:
+      - NODE_ENV=development
+
+  # Container do Frontend (página HTML)
+  frontend:
+    build: ./frontend
+    ports:
+      - "8080:80"      # Porta externa:interna (nginx usa 80)
+    volumes:
+      - ./frontend:/usr/share/nginx/html   # Sincroniza HTML
+    depends_on:
+      - backend        # Frontend depende do backend estar rodando
+
