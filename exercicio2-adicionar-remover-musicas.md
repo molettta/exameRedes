@@ -1,9 +1,9 @@
-# 🎵 Exercício 2 - Adicionando e Removendo Músicas
+# 🎵 Exercício 2 - Criando Sua Playlist Favorita
 
 ## 📋 Objetivo
-Aprender a modificar dados diretamente no código do backend, editando o array de músicas no arquivo `server.js`.
+Substituir a playlist de exemplo pela **sua própria playlist** com suas músicas favoritas!
 
-> ⚠️ **Importante:** Neste exercício NÃO vamos criar endpoints novos. Vamos editar diretamente o "banco de dados" (array) no código.
+> ⚠️ **Importante:** Neste exercício você vai **apagar todas as músicas** de exemplo e criar sua própria playlist com **no mínimo 3 músicas**.
 
 ---
 
@@ -15,26 +15,12 @@ Aprender a modificar dados diretamente no código do backend, editando o array d
 
 2. **Navegue até o arquivo:**
    ```
-   atividadeApieFront2/backend/server.js
+   backend/server.js
    ```
 
 3. **Localize o array de músicas:**
    - Procure pela linha que começa com `const musicas = [`
    - Fica aproximadamente na **linha 30** do arquivo
-   - Deve parecer assim:
-
-   ```javascript
-   const musicas = [
-       { 
-           id: 1, 
-           nome: "Bohemian Rhapsody", 
-           artista: "Queen", 
-           duracao: 354,
-           genero: "Rock"
-       },
-       // ... mais músicas
-   ];
-   ```
 
 ---
 
@@ -44,70 +30,114 @@ Cada música é um **objeto JavaScript** com estas propriedades:
 
 ```javascript
 {
-    id: 1,                        // Número único de identificação
+    id: 1,                        // Número único (1, 2, 3...)
     nome: "Nome da Música",       // Título da música
     artista: "Nome do Artista",   // Quem canta/toca
-    duracao: 240,                 // Duração em SEGUNDOS (não minutos!)
+    duracao: 240,                 // Duração em SEGUNDOS
     genero: "Rock"                // Estilo musical
 }
 ```
 
-**Como converter minutos para segundos:**
-- 3 minutos = 3 × 60 = **180 segundos**
-- 4 minutos e 30 segundos = (4 × 60) + 30 = **270 segundos**
-- 5 minutos e 15 segundos = (5 × 60) + 15 = **315 segundos**
+**📐 Como converter minutos para segundos:**
+
+| Duração | Cálculo | Resultado |
+|---------|---------|-----------|
+| 3:00 | 3 × 60 | **180 segundos** |
+| 3:30 | (3 × 60) + 30 | **210 segundos** |
+| 4:15 | (4 × 60) + 15 | **255 segundos** |
+| 5:42 | (5 × 60) + 42 | **342 segundos** |
 
 ---
 
-### PASSO 3: Adicionar uma Nova Música
+### PASSO 3: Apagar as Músicas de Exemplo
 
-1. **Encontre o final da última música no array**
-   - Procure pelo último `}` antes do `];`
+1. **Encontre o array `const musicas = [`**
 
-2. **Adicione uma vírgula** após o último `}`
+2. **Selecione TODO o conteúdo** entre os colchetes `[` e `]`
+   - São todas as músicas de Bohemian Rhapsody até Stayin' Alive
 
-3. **Cole o código de uma nova música:**
+3. **Apague tudo** (Delete ou Backspace)
 
+4. **O array deve ficar vazio assim:**
    ```javascript
-       { 
-           id: 7, 
-           nome: "Sweet Child O' Mine", 
-           artista: "Guns N' Roses", 
-           duracao: 356,           // 5:56
-           genero: "Rock"
-       }
-   ```
-
-4. **O array deve ficar assim (mostrando só o final):**
-
-   ```javascript
-       // ... músicas anteriores ...
-       { 
-           id: 6, 
-           nome: "Stayin' Alive", 
-           artista: "Bee Gees", 
-           duracao: 245,
-           genero: "Disco"
-       },
-       { 
-           id: 7, 
-           nome: "Sweet Child O' Mine", 
-           artista: "Guns N' Roses", 
-           duracao: 356,
-           genero: "Rock"
-       }
+   const musicas = [
+       
    ];
    ```
 
-5. **Salve o arquivo** (Ctrl + S)
+---
 
-6. **O servidor reinicia automaticamente!**
-   - Olhe no terminal, deve aparecer a mensagem da API novamente
-   - Isso acontece por causa do `nodemon` que monitora mudanças
+### PASSO 4: Adicionar Suas Músicas Favoritas
+
+Agora adicione **no mínimo 3 músicas** que você gosta!
+
+1. **Use este modelo para cada música:**
+
+```javascript
+    { 
+        id: 1, 
+        nome: "NOME DA MÚSICA", 
+        artista: "NOME DO ARTISTA", 
+        duracao: 000,           // duração em segundos
+        genero: "GÊNERO"
+    }
+```
+
+2. **Exemplo de playlist completa:**
+
+```javascript
+const musicas = [
+    { 
+        id: 1, 
+        nome: "Blinding Lights", 
+        artista: "The Weeknd", 
+        duracao: 200,           // 3:20
+        genero: "Pop"
+    },
+    { 
+        id: 2, 
+        nome: "Flowers", 
+        artista: "Miley Cyrus", 
+        duracao: 200,           // 3:20
+        genero: "Pop"
+    },
+    { 
+        id: 3, 
+        nome: "Anti-Hero", 
+        artista: "Taylor Swift", 
+        duracao: 200,           // 3:20
+        genero: "Pop"
+    }
+];
+```
+
+3. **⚠️ ATENÇÃO às vírgulas:**
+   - Cada música termina com `},` (com vírgula)
+   - **EXCETO a última** que termina só com `}` (sem vírgula)
+
+4. **Salve o arquivo** (Ctrl + S)
 
 ---
 
-### PASSO 4: Testar a Alteração no Postman
+### PASSO 5: Verificar se o Servidor Reiniciou
+
+1. **Olhe o terminal** onde o Docker está rodando
+
+2. **Deve aparecer a mensagem:**
+   ```
+   🎵 ================================
+      API DE PLAYLIST RODANDO!
+   🎵 ================================
+   ```
+
+3. **Se aparecer erro vermelho:**
+   - Leia a mensagem de erro
+   - Geralmente é vírgula faltando ou sobrando
+   - Corrija e salve novamente
+
+---
+
+### PASSO 6: Testar no Postman
 
 1. **Abra o Postman**
 
@@ -117,108 +147,68 @@ Cada música é um **objeto JavaScript** com estas propriedades:
    ```
 
 3. **Verifique:**
-   - Agora deve mostrar `"quantidade": 7`
-   - A nova música deve aparecer no final da lista
+   - Suas músicas devem aparecer
+   - A quantidade deve bater com o número de músicas que você adicionou
 
-4. **Teste também a duração total:**
+4. **Teste a duração total:**
    ```
    http://localhost:3000/duracao-total
    ```
-   - O tempo total deve ter aumentado!
-
----
-
-### PASSO 5: Remover uma Música
-
-1. **Volte ao arquivo `server.js`**
-
-2. **Encontre a música que quer remover**
-   - Por exemplo, vamos remover "Stayin' Alive"
-
-3. **Delete TODO o bloco da música:**
-   - Delete desde o `{` até o `}`
-   - Não esqueça de remover a vírgula que sobrar!
-
-4. **Antes de remover:**
-   ```javascript
-       { 
-           id: 5, 
-           nome: "Imagine", 
-           artista: "John Lennon", 
-           duracao: 183,
-           genero: "Pop"
-       },
-       { 
-           id: 6,                      // ← Vamos remover esta
-           nome: "Stayin' Alive", 
-           artista: "Bee Gees", 
-           duracao: 245,
-           genero: "Disco"
-       },
-       { 
-           id: 7, 
-           nome: "Sweet Child O' Mine", 
-           artista: "Guns N' Roses", 
-           duracao: 356,
-           genero: "Rock"
-       }
-   ```
-
-5. **Depois de remover:**
-   ```javascript
-       { 
-           id: 5, 
-           nome: "Imagine", 
-           artista: "John Lennon", 
-           duracao: 183,
-           genero: "Pop"
-       },
-       { 
-           id: 7, 
-           nome: "Sweet Child O' Mine", 
-           artista: "Guns N' Roses", 
-           duracao: 356,
-           genero: "Rock"
-       }
-   ```
-
-6. **Salve o arquivo** (Ctrl + S)
-
-7. **Teste no Postman** - a música removida não deve mais aparecer
 
 ---
 
 ## ✏️ Sua Tarefa
 
-Agora é sua vez! Faça as seguintes alterações:
+### Crie sua playlist com NO MÍNIMO 3 músicas favoritas!
 
-### Tarefa 1: Adicione 2 músicas novas da sua escolha
-Escolha músicas que você gosta e adicione ao array.
+Preencha a tabela abaixo com as músicas que você vai adicionar:
 
-**Música 1:**
-- Nome: _____________
-- Artista: _____________
-- Duração (em segundos): _____________
-- Gênero: _____________
+| # | Música | Artista | Duração (MM:SS) | Duração (segundos) | Gênero |
+|---|--------|---------|-----------------|-------------------|--------|
+| 1 | | | | | |
+| 2 | | | | | |
+| 3 | | | | | |
+| 4 | | | | | |
+| 5 | | | | | |
 
-**Música 2:**
-- Nome: _____________
-- Artista: _____________
-- Duração (em segundos): _____________
-- Gênero: _____________
+---
 
-### Tarefa 2: Remova 1 música da lista original
-Qual música você removeu? _____________
+## 💡 Como Descobrir a Duração de uma Música
+
+### Método 1: Google
+1. Pesquise: `"nome da música" duration`
+2. O Google geralmente mostra a duração
+
+### Método 2: Spotify / YouTube
+1. Abra a música no Spotify ou YouTube
+2. Veja a duração no player
+
+### Método 3: Chute Educado 😄
+- Músicas curtas: ~180 segundos (3 min)
+- Músicas médias: ~210 segundos (3:30)
+- Músicas longas: ~300 segundos (5 min)
 
 ---
 
 ## ✅ Checklist de Entrega
 
-- [ ] Adicionei 2 músicas novas ao array
-- [ ] O servidor reiniciou automaticamente após salvar
-- [ ] Testei no Postman e as músicas novas aparecem
-- [ ] Removi 1 música da lista
-- [ ] A duração total mudou conforme as alterações
+- [ ] Apaguei todas as músicas de exemplo
+- [ ] Adicionei no mínimo 3 músicas minhas favoritas
+- [ ] Cada música tem: id, nome, artista, duracao, genero
+- [ ] Os IDs estão em sequência (1, 2, 3...)
+- [ ] A última música NÃO tem vírgula depois do `}`
+- [ ] Salvei o arquivo e o servidor reiniciou
+- [ ] Testei no Postman e minhas músicas aparecem
+- [ ] A duração total está calculando corretamente
+
+---
+
+## 📸 Captura de Tela para Entrega
+
+Tire um print do Postman mostrando:
+1. A URL `http://localhost:3000/pega-musicas`
+2. A lista com SUAS músicas favoritas
+3. O status `200 OK`
 
 ---
 
@@ -226,20 +216,40 @@ Qual música você removeu? _____________
 
 | Problema | Causa | Solução |
 |----------|-------|---------|
-| Erro de sintaxe no terminal | Faltou vírgula ou chave | Verifique se todas as `{` têm `}` correspondente |
-| Música não aparece | Esqueceu de salvar | Pressione Ctrl + S |
-| Servidor não reinicia | Erro grave no código | Olhe a mensagem de erro no terminal |
-| `unexpected token` | Vírgula no lugar errado | A última música NÃO deve ter vírgula depois |
+| `Unexpected token` | Vírgula errada | Verifique: última música NÃO tem vírgula |
+| `Unexpected string` | Faltou vírgula | Adicione vírgula entre as músicas |
+| Servidor não reinicia | Erro de sintaxe | Leia o erro no terminal e corrija |
+| `musicas is not defined` | Deletou demais | Mantenha `const musicas = [ ];` |
+| Aspas erradas | Copiou do Word | Use aspas retas `"` e não curvas `"` |
 
 ---
 
-## 💡 Dica Extra
+## 🎯 Exemplo Completo
 
-Para encontrar a duração de uma música em segundos:
-1. Google: "nome da música duration"
-2. Converta para segundos: minutos × 60 + segundos
+Se ainda tiver dúvida, aqui está um exemplo completo funcionando:
 
-**Exemplo:** "Wonderwall" = 4:18
-- 4 × 60 = 240
-- 240 + 18 = **258 segundos**
-
+```javascript
+const musicas = [
+    { 
+        id: 1, 
+        nome: "Shallow", 
+        artista: "Lady Gaga", 
+        duracao: 216,           // 3:36
+        genero: "Pop"
+    },
+    { 
+        id: 2, 
+        nome: "Evidências", 
+        artista: "Chitãozinho e Xororó", 
+        duracao: 288,           // 4:48
+        genero: "Sertanejo"
+    },
+    { 
+        id: 3, 
+        nome: "Aquarela", 
+        artista: "Toquinho", 
+        duracao: 252,           // 4:12
+        genero: "MPB"
+    }
+];
+```
